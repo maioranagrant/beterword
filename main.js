@@ -51,6 +51,7 @@ function initCode()
     document.getElementById("correctDisplay").style.visibility = "hidden";
     document.getElementById("celerityDisplay").style.visibility = "hidden";
     document.getElementById("scoreDisplay").style.visibility = "hidden";
+    document.getElementById("nextButton").disabled = true;
 }
 
 function playTossup()
@@ -60,6 +61,7 @@ function playTossup()
     audio.play();
     startTime = Date.now();
     document.getElementById("startButton").disabled = true;
+    document.getElementById("nextButton").disabled = true;
 }
 function buzz()
 {
@@ -67,6 +69,8 @@ function buzz()
     audio.pause();
     
     document.getElementById("enterAnswer").style.visibility = "visible";
+    document.getElementById("buzzButton").disabled = true;
+
 }
 function nextTossup()
 {
@@ -76,6 +80,7 @@ function nextTossup()
     document.getElementById("celerityDisplay").style.visibility = "hidden";
     document.getElementById("scoreDisplay").style.visibility = "hidden";
     document.getElementById("startButton").disabled = false;
+    document.getElementById("buzzButton").disabled = false;
 
 }
 function evaluateAnswer()
@@ -106,6 +111,8 @@ function evaluateAnswer()
         document.getElementById("correctDisplay").style.visibility = "visible";
     }
     document.getElementById("nextButton").style.visibility = "visible";
+    document.getElementById("nextButton").disabled = false;
+
 
 
     
