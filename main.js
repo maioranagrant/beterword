@@ -51,7 +51,6 @@ function initCode()
     document.getElementById("correctDisplay").style.visibility = "hidden";
     document.getElementById("celerityDisplay").style.visibility = "hidden";
     document.getElementById("scoreDisplay").style.visibility = "hidden";
-    console.log("here11");
 }
 
 function playTossup()
