@@ -43,7 +43,6 @@ function initCode()
         
         
     }
-    document.getElementById("startButton").addEventListener("click",playTossup());
     
     document.getElementById("nextButton").style.visibility = "hidden";
     
