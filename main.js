@@ -59,7 +59,7 @@ function playTossup()
     audio.muted = false;
     audio.play();
     startTime = Date.now();
-
+    document.getElementById("startButton").disabled = true;
 }
 function buzz()
 {
@@ -75,6 +75,7 @@ function nextTossup()
     document.getElementById("correctDisplay").style.visibility = "hidden";
     document.getElementById("celerityDisplay").style.visibility = "hidden";
     document.getElementById("scoreDisplay").style.visibility = "hidden";
+    document.getElementById("startButton").disabled = false;
 
 }
 function evaluateAnswer()
