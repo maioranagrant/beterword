@@ -52,6 +52,7 @@ function initCode()
     document.getElementById("celerityDisplay").style.visibility = "hidden";
     document.getElementById("scoreDisplay").style.visibility = "hidden";
     document.getElementById("nextButton").disabled = true;
+    document.getElementById("buzzButton").disabled = true;
 }
 
 function playTossup()
@@ -62,6 +63,7 @@ function playTossup()
     startTime = Date.now();
     document.getElementById("startButton").disabled = true;
     document.getElementById("nextButton").disabled = true;
+    document.getElementById("buzzButton").disabled = false;
 }
 function buzz()
 {
@@ -80,7 +82,7 @@ function nextTossup()
     document.getElementById("celerityDisplay").style.visibility = "hidden";
     document.getElementById("scoreDisplay").style.visibility = "hidden";
     document.getElementById("startButton").disabled = false;
-    document.getElementById("buzzButton").disabled = false;
+    
 
 }
 function evaluateAnswer()
