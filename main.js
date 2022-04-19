@@ -76,11 +76,10 @@ function nextTossup()
 {
     tossupNum++;
     document.getElementById("enterAnswer").style.visibility = "hidden";
-    document.getElementById("enterAnswer").innerHTML = "";
+    document.getElementById("enterAnswer").value = "";
     document.getElementById("correctDisplay").style.visibility = "hidden";
     document.getElementById("celerityDisplay").style.visibility = "hidden";
     document.getElementById("scoreDisplay").style.visibility = "hidden";
-    document.getElementById("scoreDisplay").innerHTML = "";
 
 }
 function evaluateAnswer()
