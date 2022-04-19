@@ -76,7 +76,6 @@ function nextTossup()
 {
     tossupNum++;
     document.getElementById("enterAnswer").style.visibility = "hidden";
-    document.getElementById("enterAnswer").value = "";
     document.getElementById("correctDisplay").style.visibility = "hidden";
     document.getElementById("celerityDisplay").style.visibility = "hidden";
     document.getElementById("scoreDisplay").style.visibility = "hidden";
