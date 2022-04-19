@@ -82,6 +82,7 @@ function nextTossup()
     document.getElementById("celerityDisplay").style.visibility = "hidden";
     document.getElementById("scoreDisplay").style.visibility = "hidden";
     document.getElementById("startButton").disabled = false;
+    document.getElementById("buzzButton").disabled = true;
     
 
 }
