@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <body>
+        <input type="button" id = "startButton" value = "Start" onclick="playTossup();">
+    </body>
+    <body>
+        <input type="button" id = "buzzButton" value = "Buzz" onclick="buzz();">
+    </body>
+    <body>
+        <input type="button" id = "nextButton" value = "Next Tossup" onclick="nextTossup();">
+    </body>
+    <form id = "enterAnswer">
+        <label for="answer">Answer:</label><br>
+        <input type = "text" id ="answer">
+        <input type="button" id = "enterButton" value="Submit" onclick = "evaluateAnswer();">
+    </form>
+    <p id = "correctDisplay">
+        Placeholder
+    </p>
+    <p id = "celerityDisplay">
+        0.0
+    </p>
+    <p id = "scoreDisplay">
+        10
+    </p>
+
+    <script src = "main.js" defer></script>
+    
+</html>
