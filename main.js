@@ -1,10 +1,10 @@
 
 if( document.readyState !== 'loading' ) {
-    console.log( 'document is already ready, just execute code here' );
+    
     initCode();
 } else {
     document.addEventListener('DOMContentLoaded', function () {
-        console.log( 'document was not ready, place code here' );
+       
         initCode();
     });
 }
@@ -20,8 +20,6 @@ var nowTime;
 
 function initCode()
 {
-
-    console.log("here11");
     tossupNum = 0;
     audio;
     lastAnswer; 
@@ -59,7 +57,6 @@ function initCode()
 function playTossup()
 {
     audio = files[tossupNum];
-    console.log('here');
     audio.muted = false;
     audio.play();
     startTime = Date.now();
