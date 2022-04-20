@@ -9,26 +9,28 @@
         <div style="padding-left: 50px; padding-top: 50px">
             <input type="button" id="startButton" value="Start" onclick="playTossup();">
 
-            <input type="button" id="buzzButton" value="Buzz" onclick="buzz();">
+            <input type="button" id="buzzButton" value="Buzz" onclick="buzz();" disabled>
 
-            <input type="button" id="nextButton" value="Next Tossup" onclick="nextTossup();">
+            <input type="button" id="nextButton" value="Next Tossup" onclick="nextTossup();" style="visibility: hidden;" disabled>
         </div>
         <div style="padding-left: 50px; padding-top: 10px;">
-            <form id="enterAnswer">
+            <div id="enterAnswer"  style="visibility: hidden;">
                 <label for="answer">Answer:</label><br>
                 <input type="text" id="answer">
                 <input type="button" id="enterButton" value="Submit" onclick="evaluateAnswer();">
-            </form>
+            </div>
         </div>
-        <p id="correctDisplay" style="padding-left: 50px; padding-top: 10px;">
-            Placeholder
-        </p>
-        <p id="celerityDisplay" style="padding-left: 50px; padding-top: 10px;">
-            0.0
-        </p>
-        <p id="scoreDisplay" style="padding-left: 50px; padding-top: 10px;">
-            10
-        </p>
+        <div id="display"  style="visibility: hidden; vertical-align: middle;"> 
+            <p id="correctDisplay" style="padding-left: 50px; padding-top: 10px;">
+                Placeholder
+            </p>
+            <p id="celerityDisplay" style="padding-left: 50px; padding-top: 10px;">
+                0.0
+            </p>
+            <p id="scoreDisplay" style="padding-left: 50px; padding-top: 10px;">
+                10
+            </p>
+        </div>
     </div>
 </body>
 <script src="main.js" defer></script>

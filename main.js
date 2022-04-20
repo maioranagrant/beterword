@@ -1,4 +1,4 @@
-
+console.log("code is being run as it were so to speak if you will easton sucks");
 if( document.readyState !== 'loading' ) {
     
     initCode();
@@ -20,15 +20,20 @@ var correctsound;
 var incorrectsound;
 var buzzsound;
 
+var NextButton;
+var EnterAnswer;
+var CorrectDisplay;
+var CelerityDisplay;
+var ScoreDisplay;
+var BuzzButton;
+var StartTossupButton;
 
 function initCode()
 {
     tossupNum = 0;
-    audio;
     lastAnswer; 
     files = new Array();
     answers = new Array();
-
     
     correctsound = new Audio('correct.mp3');
     incorrectsound = new Audio('incorrect.mp3');
@@ -40,24 +45,24 @@ function initCode()
     answers[3] = 'Melville';
     answers[4] = 'Bolivar';
     
-    
-    
+    NextButton = document.getElementById("nextButton");
+    EnterAnswer = document.getElementById("enterAnswer");
+    CorrectDisplay = document.getElementById("correctDisplay");
+    CelerityDisplay = document.getElementById("celerityDisplay");
+    ScoreDisplay = document.getElementById("scoreDisplay");
+    BuzzButton = document.getElementById("buzzButton");
+    StartTossupButton = document.getElementById("startButton");
+;
+
     for(let i = 0; i < 5; i++)
     {
         files[i] = new Audio('Tossups\\' + (i+1).toString() + '.mp3');
-        
-        
     }
     
-    document.getElementById("nextButton").style.visibility = "hidden";
-    
-    document.getElementById("enterAnswer").style.visibility = "hidden";
-    document.getElementById("correctDisplay").style.visibility = "hidden";
-    document.getElementById("celerityDisplay").style.visibility = "hidden";
-    document.getElementById("scoreDisplay").style.visibility = "hidden";
-    document.getElementById("nextButton").disabled = true;
-    document.getElementById("buzzButton").disabled = true;
+    NextButton.disabled = true;
+    BuzzButton.disabled = true;
 }
+
 
 function playTossup()
 {
@@ -65,9 +70,9 @@ function playTossup()
     audio.muted = false;
     audio.play();
     startTime = Date.now();
-    document.getElementById("startButton").disabled = true;
-    document.getElementById("nextButton").disabled = true;
-    document.getElementById("buzzButton").disabled = false;
+    StartTossupButton.disabled = true;
+    NextButton.disabled = true;
+    BuzzButton.disabled = false;
 }
 function buzz()
 {
@@ -75,21 +80,21 @@ function buzz()
     audio.pause();
     buzzsound.muted = false;
     buzzsound.play();
-    document.getElementById("enterAnswer").style.visibility = "visible";
-    document.getElementById("buzzButton").disabled = true;
+    show(EnterAnswer);
+    BuzzButton.disabled = true;
 
 }
 function nextTossup()
 {
     tossupNum++;
-
+    NextButton.disabled = true;
     document.getElementById("answer").value = "";
-    document.getElementById("enterAnswer").style.visibility = "hidden";
-    document.getElementById("correctDisplay").style.visibility = "hidden";
-    document.getElementById("celerityDisplay").style.visibility = "hidden";
-    document.getElementById("scoreDisplay").style.visibility = "hidden";
-    document.getElementById("startButton").disabled = false;
-    document.getElementById("buzzButton").disabled = true;
+    hide(EnterAnswer);
+    hide(CorrectDisplay);
+    hide(CelerityDisplay);
+    hide(ScoreDisplay);
+    StartTossupButton.disabled = false;
+    BuzzButton.disabled = true;
     
 
 }
@@ -100,10 +105,10 @@ function evaluateAnswer()
         lastAnswer = true;
         correctsound.muted = false;
         correctsound.play();
-        document.getElementById("correctDisplay").innerHTML = "Correct!";
-        document.getElementById("correctDisplay").style.visibility = "visible";
-        document.getElementById("celerityDisplay").style.visibility = "visible";
-        document.getElementById("scoreDisplay").style.visibility = "visible";
+        CorrectDisplay.innerHTML = "Correct!";
+        show(CorrectDisplay);
+        show(CelerityDisplay);
+        show(ScoreDisplay);
 
         var deltaTime = nowTime - startTime;
         var celer = 1.0 - ((deltaTime/1000.0) / audio.duration);
@@ -113,25 +118,51 @@ function evaluateAnswer()
         {
             celer = 0;
         }
-        document.getElementById("scoreDisplay").innerHTML = "Score: " + score + " points";
-        document.getElementById("celerityDisplay").innerHTML = "Celerity: " + celer;
+        ScoreDisplay.innerHTML = "Score: " + score + " points";
+        CelerityDisplay.innerHTML = "Celerity: " + celer;
     }
     else
     {
         incorrectsound.muted = false;
         incorrectsound.play();
         lastAnswer = false;
-        document.getElementById("correctDisplay").innerHTML = "Incorrect!";
-        document.getElementById("correctDisplay").style.visibility = "visible";
-        document.getElementById("celerityDisplay").style.visibility = "visible";
-        document.getElementById("celerityDisplay").innerHTML = "Correct answer: " + answers[tossupNum];
+        CorrectDisplay.innerHTML = "Incorrect!";
+        show(CorrectDisplay);
+        show(CelerityDisplay);
+        CelerityDisplay.innerHTML = "Correct answer: " + answers[tossupNum];
     }
-    document.getElementById("nextButton").style.visibility = "visible";
-    document.getElementById("nextButton").disabled = false;
+    show(NextButton);
+    NextButton.disabled = false;
 
 
 
     
 }
+/*
+    @parem domElement element from dom to be set to hidden or visible
+    Ensures that visiblity is switched from hidden to visble or vice verse 
+*/
+function changeVisibilty(domElement){ //pant is sus
+    if(domElement.style.visibility == "hidden"){
+        domElement.style.visibility = "visible"
+    }
+    else{
+        domElement.style.visibility = "hidden";
+    }
+}
 
-
+/*
+    @parem domElement element from dom to be set to hidden 
+    Ensures that visiblity is set to hidden
+*/
+function hide(domElement){
+    domElement.style.visibility = "hidden";
+}
+/*
+    @parem domElement element from dom to be set to hidden 
+    Ensures that visiblity is set to visible
+*/
+function show(domElement)
+{
+    domElement.style.visibility = "visible";
+}
