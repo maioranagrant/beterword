@@ -95,7 +95,7 @@ function nextTossup()
 }
 function evaluateAnswer()
 {
-    if (document.getElementById("answer").value == (answers[tossupNum]))
+    if (document.getElementById("answer").value.toLowerCase() == (answers[tossupNum].toLowerCase()))
     {
         lastAnswer = true;
         correctsound.muted = false;
@@ -123,6 +123,8 @@ function evaluateAnswer()
         lastAnswer = false;
         document.getElementById("correctDisplay").innerHTML = "Incorrect!";
         document.getElementById("correctDisplay").style.visibility = "visible";
+        document.getElementById("celerityDisplay").style.visibility = "visible";
+        document.getElementById("celerityDisplay").innerHTML = "Correct answer: " + answers[tossupNum];
     }
     document.getElementById("nextButton").style.visibility = "visible";
     document.getElementById("nextButton").disabled = false;

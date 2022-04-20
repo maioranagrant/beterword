@@ -10,7 +10,7 @@ loginButton.addEventListener("click", (e) => {
 
     if (username === "grant" && password === "1234") {
         //alert("You have successfully logged in.");
-        window.location.replace('game.html');
+        window.location.replace('second.html');
     } else {
         loginErrorMsg.style.opacity = 1;
     }
