@@ -16,6 +16,9 @@ var files;
 var answers;
 var startTime;
 var nowTime;
+var correctsound;
+var incorrectsound;
+var buzzsound;
 
 
 function initCode()
@@ -27,7 +30,9 @@ function initCode()
     answers = new Array();
 
     
-    
+    correctsound = new Audio('correct.mp3');
+    incorrectsound = new Audio('incorrect.mp3');
+    buzzsound = new Audio('buzz.mp3');
     
     answers[0] = 'American Gothic';
     answers[1] = 'Tchaikovsky';
@@ -68,7 +73,8 @@ function buzz()
 {
     nowTime = Date.now();
     audio.pause();
-    
+    buzzsound.muted = false;
+    buzzsound.play();
     document.getElementById("enterAnswer").style.visibility = "visible";
     document.getElementById("buzzButton").disabled = true;
 
@@ -90,6 +96,8 @@ function evaluateAnswer()
     if (document.getElementById("answer").value == (answers[tossupNum]))
     {
         lastAnswer = true;
+        correctsound.muted = false;
+        correctsound.play();
         document.getElementById("correctDisplay").innerHTML = "Correct!";
         document.getElementById("correctDisplay").style.visibility = "visible";
         document.getElementById("celerityDisplay").style.visibility = "visible";
@@ -108,6 +116,8 @@ function evaluateAnswer()
     }
     else
     {
+        incorrectsound.muted = false;
+        incorrectsound.play();
         lastAnswer = false;
         document.getElementById("correctDisplay").innerHTML = "Incorrect!";
         document.getElementById("correctDisplay").style.visibility = "visible";
