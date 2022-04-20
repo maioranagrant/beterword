@@ -82,6 +82,8 @@ function buzz()
 function nextTossup()
 {
     tossupNum++;
+
+    document.getElementById("enterAnswer").value = "";
     document.getElementById("enterAnswer").style.visibility = "hidden";
     document.getElementById("correctDisplay").style.visibility = "hidden";
     document.getElementById("celerityDisplay").style.visibility = "hidden";
