@@ -1,0 +1,10 @@
+{
+    "users":
+    {
+        "admin":{
+            "password":"admin",
+            "firstname":"Grant",
+            "lastname": "Maiorana"
+        }
+    }
+}
