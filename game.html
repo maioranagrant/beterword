@@ -5,7 +5,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div>
+    <div id = "maindiv">
         <div style="padding-left: 50px; padding-top: 50px">
             <input type="button" id="startButton" value="Start" onclick="playTossup();">
 
@@ -32,7 +32,28 @@
             </p>
         </div>
     </div>
-</body>
+    <div id = "finaldiv"  style="padding-left: 50px; padding-top: 50px; visibility: hidden;" >
+        <p id = finalDisplay></p>
+        <input type = "button" id = "exitButton" value = "Finish Game" onclick = "exitGame();" >
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+<script>
+    const firebaseConfig = {
+    apiKey: "AIzaSyDzkQnoQFy0BoiiMIF-mKn-r8A33qpwP9c",
+    authDomain: "beterword.firebaseapp.com",
+    databaseURL: "https://beterword-default-rtdb.firebaseio.com",
+    projectId: "beterword",
+    storageBucket: "beterword.appspot.com",
+    messagingSenderId: "806020900729",
+    appId: "1:806020900729:web:eca1a5d7b63bc7ee89b1a8",
+    measurementId: "G-ZVBSDB3TJX"
+    };
+
+    // Initialize Firebase
+
+</script>
 <script src="main.js" defer></script>
+</body>
+
 
 </html> 

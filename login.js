@@ -43,6 +43,12 @@ loginButton.addEventListener("click", (e) => {
                 loginErrorMsg.innerText = "Invalid username, please create an account.";
                 loginErrorMsg.style.opacity = 1;
             }
+            const user = {
+                first : snapshot.val().firstName,
+                last : snapshot.val().lastname,
+                eml : snapshot.val().username
+            }
+            localStorage.setItem("user",JSON.stringify(user));
             var foundpw = snapshot.val().password;
             if (password == snapshot.val().password) {
                 //alert("You have successfully logged in.");

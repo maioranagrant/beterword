@@ -16,7 +16,8 @@ function fillTable()
            //console.log(childNodes.val().score);
             const dict = 
             {
-                name1 : childNodes.val().username,
+                first : childNodes.val().firstName,
+                last : childNodes.val().lastname,
                 score : childNodes.val().score,
                 number : childNodes.val().numcorrect,
                 celer : childNodes.val().celerity,
@@ -58,7 +59,7 @@ function fillTableHtml(ar)
        var celer = row.insertCell(4);
 
        rank.innerHTML = i+1;
-       name.innerHTML = ar[i]["name1"];
+       name.innerHTML = ar[i]["first"] + " " + ar[i]["last"];
        score.innerHTML = ar[i]["score"];
        numCorrect.innerHTML = ar[i]["number"]; 
        celer.innerHTML = ar[i]["celer"];

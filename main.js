@@ -28,8 +28,18 @@ var ScoreDisplay;
 var BuzzButton;
 var StartTossupButton;
 
+var totalScore;
+var totalCel = 0;
+var totalCorrect;
+var user;
+
 function initCode()
 {
+    const app = firebase.initializeApp(firebaseConfig);
+    totalScore = 0;
+    totalCel = 0;
+    totalCorrect = 0;
+    localStorage.getItem("user");
     tossupNum = 0;
     lastAnswer; 
     files = new Array();
@@ -52,7 +62,12 @@ function initCode()
     ScoreDisplay = document.getElementById("scoreDisplay");
     BuzzButton = document.getElementById("buzzButton");
     StartTossupButton = document.getElementById("startButton");
-;
+
+    //document.getElementById("finaldiv").style.visibility = "hidden";
+
+    user = JSON.parse(localStorage.getItem("user"));
+    // console.log(user["eml"]);
+    // console.log(user);
 
     for(let i = 0; i < 5; i++)
     {
@@ -112,13 +127,19 @@ function evaluateAnswer()
 
         var deltaTime = nowTime - startTime;
         var celer = 1.0 - ((deltaTime/1000.0) / audio.duration);
-        celer = celer.toFixed(3)
+        
         var score = Math.round(10 + (10 * celer));
+
+        totalScore += score;
+        totalCorrect++;
+        totalCel = totalCel + celer;
+
         if (celer < 0)
         {
             celer = 0;
         }
-        ScoreDisplay.innerHTML = "Score: " + score + " points";
+        celer = celer.toFixed(3)
+        ScoreDisplay.innerHTML = "Tossup Score: " + score + " points" + "<br>" + "Total score: " + totalScore;
         CelerityDisplay.innerHTML = "Celerity: " + celer;
     }
     else
@@ -135,7 +156,10 @@ function evaluateAnswer()
     NextButton.disabled = false;
 
 
-
+    if (tossupNum == 4)
+    {
+        endGame();
+    }
     
 }
 /*
@@ -165,4 +189,45 @@ function hide(domElement){
 function show(domElement)
 {
     domElement.style.visibility = "visible";
+}
+
+function endGame()
+{
+    console.log(user["eml"]);
+    var newUserRef = firebase.database().ref("week1scores/" + user["eml"]);
+
+        var c;
+        if (totalCorrect == 0)
+        {
+            c = 0;
+        }
+        else
+        {
+            console.log(totalCel);
+            console.log(totalCorrect);
+            c = totalCel/totalCorrect;
+        }
+        newUserRef.update ({
+        "username": user["eml"],
+        "firstName":user["first"],
+        "lastname":user["last"],
+        "celerity":c,
+        "score":totalScore,
+        "numcorrect":totalCorrect
+        });
+
+        //document.getElementById("maindiv").style.visibility = "hidden";
+        document.getElementById("finaldiv").style.visibility = "visible";
+        NextButton.disabled = true;
+    StartTossupButton.disabled = true;
+    BuzzButton.disabled = true;
+    document.getElementById("enterButton").disabled = true;
+        //hide(NextButton);
+        document.getElementById("finalDisplay").innerHTML = "Total Score: " + totalScore + "<br>" + "Avg. Correct Celerity: " + c.toFixed(3) + "<br>" +"# of Questions Correct: " + totalCorrect;
+
+}
+function exitGame()
+{
+    
+    window.location.replace('leaderboard.html');
 }

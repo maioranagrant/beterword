@@ -43,7 +43,8 @@ function addToDatabase()
         newUserRef.update ({
         "password": pw,
         "firstName":first,
-        "lastname":last
+        "lastname":last,
+        "username":result
         });
         
         successDisplay.innerText = "Account created successfully! Please log in.";
