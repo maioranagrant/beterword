@@ -25,32 +25,57 @@ function addToDatabase()
     last = lastName.value;
 
     let result = eml.replace(/\./g, "__dot__");
-
-    firebase.database().ref('users/' + result).on('value', function(snapshot) {
-
-        // var foundpw = snapshot.val().password;
-        // if (password == snapshot.val().password) {
-        //     //alert("You have successfully logged in.");
-        //     window.location.replace('second.html');
-        // }
-        // else
-        // {
-        //     loginErrorMsg.innerText = "Invalid Password";
-        //     loginErrorMsg.style.opacity = 1;
-        // }
-        var newUserRef = firebase.database().ref("users/"+result);
-
-        newUserRef.update ({
-        "password": pw,
-        "firstName":first,
-        "lastname":last,
-        "username":result
-        });
-        
-        successDisplay.innerText = "Account created successfully! Please log in.";
-        successDisplay.style.visibility = "visible";
-        goBack.style.visibility = "visible";
+    // var rootRef = firebase.database().ref('users');
+    //     rootRef.on('value', snapshot => {
+    //         snapshot.forEach(child => {    
+    //             console.log(child.key);
+    //             console.log(result);
+    //           if (child.key === result)
+    //           {
+    //                 successDisplay.innerText = "Email is already in use! Laf";
+    //                 successDisplay.style.visibility = "visible";
+    //               return;
+    //           }
+    //         });
+    //       });
+    firebase.database().ref('users').on('value', function(snap){
+    snap.forEach(function(childNodes){
+        let first = (childNodes.val().username).replace(/\s+/g, "");
+        let second = result;
+        var found = false;
+        if (first.toString() === second.toString())
+              {
+                  //console.log("here");
+                    successDisplay.innerText = "Email is already in use! Laf";
+                    successDisplay.style.visibility = "visible";
+                    found = true;
+                  return;
+              }
+    });
+    });
+    
 
     
-    });
+    if (!found)
+    {
+        firebase.database().ref('users/' + result).on('value', function(snapshot) {
+
+            
+            var newUserRef = firebase.database().ref("users/"+result);
+    
+            newUserRef.update ({
+            "password": pw,
+            "firstName":first,
+            "lastname":last,
+            "username":result
+            });
+            
+            successDisplay.innerText = "Account created successfully! Please log in.";
+            successDisplay.style.visibility = "visible";
+            goBack.style.visibility = "visible";
+    
+        
+        });
+    }
+    
 }

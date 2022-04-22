@@ -193,7 +193,6 @@ function show(domElement)
 
 function endGame()
 {
-    console.log(user["eml"]);
     var newUserRef = firebase.database().ref("week1scores/" + user["eml"]);
 
         var c;

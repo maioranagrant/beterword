@@ -62,7 +62,7 @@ function fillTableHtml(ar)
        name.innerHTML = ar[i]["first"] + " " + ar[i]["last"];
        score.innerHTML = ar[i]["score"];
        numCorrect.innerHTML = ar[i]["number"]; 
-       celer.innerHTML = ar[i]["celer"];
+       celer.innerHTML = ar[i]["celer"].toFixed(3);
     }
 }
 
