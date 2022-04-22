@@ -25,7 +25,7 @@ function startGame(week)
         }
         else
         {
-            //window.location.replace('second.html');
+            window.location.replace('second.html');
         }
         });
         //console.log(found);
