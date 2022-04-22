@@ -1,8 +1,8 @@
-
+const app = firebase.initializeApp(firebaseConfig);
 
 function startGame(week)
 {
-    const app = firebase.initializeApp(firebaseConfig);
+    
     var found = false;
     user =  JSON.parse(localStorage.getItem("user"));
     //console.log(user["eml"]);
