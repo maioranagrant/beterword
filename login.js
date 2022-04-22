@@ -46,7 +46,7 @@ loginButton.addEventListener("click", (e) => {
             var foundpw = snapshot.val().password;
             if (password == snapshot.val().password) {
                 //alert("You have successfully logged in.");
-                window.location.replace('second.html');
+                window.location.replace('home.html');
             }
             else
             {
