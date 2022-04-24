@@ -230,7 +230,7 @@ function evaluateAnswer()
             }
             
         }
-        CelerityDisplay.innerHTML = "Correct answers: " + correctstring;
+        CelerityDisplay.innerHTML = "Correct answers: " + correctstring + "<br>" + "<br>" + "Please note: all responses will be reviewed before scores are finalized.";
     }
     show(NextButton);
     NextButton.disabled = false;
