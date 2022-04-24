@@ -125,6 +125,7 @@ function buzz()
 }
 function nextTossup()
 {
+    document.getElementById("enterButton").disabled = false;
     tossupNum++;
     document.getElementById("tossupNumP").innerText = "Tossup " + (tossupNum+1) + " of 20";
     NextButton.disabled = true;
@@ -146,9 +147,13 @@ function nextTossup()
 }
 function evaluateAnswer()
 {
-    
+    document.getElementById("enterButton").disabled = true;
     var deltaTime = nowTime - startTime;
     var celer = 1.0 - ((deltaTime/1000.0) / audio.duration);
+    if (celer < 0)
+    {
+        celer = 0;
+    }
     var score = Math.round(10 + (10 * celer));
     celerArr.push(celer);
     scoreArr.push(score);
@@ -185,10 +190,7 @@ function evaluateAnswer()
         totalCorrect++;
         totalCel = totalCel + celer;
 
-        if (celer < 0)
-        {
-            celer = 0;
-        }
+        
         celer = celer.toFixed(3)
         ScoreDisplay.innerHTML = "Tossup Score: " + score + " points" + "<br>" + "Total score: " + totalScore;
         CelerityDisplay.innerHTML = "Celerity: " + celer;
