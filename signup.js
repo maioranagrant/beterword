@@ -38,11 +38,12 @@ function addToDatabase()
     //           }
     //         });
     //       });
+
+    var found = false;
     firebase.database().ref('users').on('value', function(snap){
     snap.forEach(function(childNodes){
         let first = (childNodes.val().username).replace(/\s+/g, "");
         let second = result;
-        var found = false;
         if (first.toString() === second.toString())
               {
                   //console.log("here");

@@ -8,15 +8,22 @@ function startGame(week)
     //console.log(user["eml"]);
     var result = user["eml"];
     //console.log()
-    firebase.database().ref('week1scores').on('value', function(snap){
+    firebase.database().ref('openedweek1').on('value', function(snap){
         
         snap.forEach(function(childNodes){
-            let first = (childNodes.val().username).replace(/\s+/g, "");
+            if (childNodes.val().name === "placeholder")
+            {
+                'pass';
+            }
+            else
+            {
+            let first = (childNodes.val().name).replace(/\s+/g, "");
             let second = result;
             if (first.toString() === second.toString())
             {
                 found = true;
             }
+        }
         });
         if (found)
         {

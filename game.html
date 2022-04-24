@@ -3,11 +3,19 @@
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <title>Beterword</title>
+
 </head>
 <body>
-    <div id = "maindiv">
+    <div id = "maindiv" style="padding-left: 50px; padding-top: 50px">
+        <div style = "padding-left: 50px">
+            <p id = "tossupNumP"></p>
+            <div class="progress" style="width: 90%">
+                <div id = "prog" class="progress-bar" role="progressbar" aria-valuenow="0"style = "width: 5%;"></div>
+              </div>
+        </div>
         <div style="padding-left: 50px; padding-top: 50px">
-            <input type="button" id="startButton" value="Start" onclick="playTossup();">
+            <input type="button" id="startButton" value="Start Tossup" onclick="playTossup();">
 
             <input type="button" id="buzzButton" value="Buzz" onclick="buzz();" disabled>
 
@@ -32,7 +40,7 @@
             </p>
         </div>
     </div>
-    <div id = "finaldiv"  style="padding-left: 50px; padding-top: 50px; visibility: hidden;" >
+    <div id = "finaldiv"  style="padding-left: 100px; padding-top: 50px; visibility: hidden;" >
         <p id = finalDisplay></p>
         <input type = "button" id = "exitButton" value = "Finish Game" onclick = "exitGame();" >
     </div>

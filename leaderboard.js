@@ -11,6 +11,12 @@ function fillTable()
 
         snap.forEach(function(childNodes){
      
+            if (childNodes.val().firstName === "placeholder")
+            {
+                'pass';
+            }
+            else
+            {
            //This loop iterates over children of user_id
            //childNodes.key is key of the children of userid such as (20170710)
            //console.log(childNodes.val().score);
@@ -21,6 +27,7 @@ function fillTable()
                 score : childNodes.val().score,
                 number : childNodes.val().numcorrect,
                 celer : childNodes.val().celerity,
+                pending: childNodes.val().pending
                 
             };
             //console.log(childNodes.val().username);
@@ -32,7 +39,7 @@ function fillTable()
             //childNodes.val().rest_time;
             //childNodes.val().interval_time;
      
-     
+        }
        });
        //console.log(arr[0]["number"]);
        arr.reverse();
@@ -57,12 +64,15 @@ function fillTableHtml(ar)
        var score = row.insertCell(2);
        var numCorrect = row.insertCell(3);
        var celer = row.insertCell(4);
+       var pend = row.insertCell(5);
 
        rank.innerHTML = i+1;
        name.innerHTML = ar[i]["first"] + " " + ar[i]["last"];
        score.innerHTML = ar[i]["score"];
        numCorrect.innerHTML = ar[i]["number"]; 
        celer.innerHTML = ar[i]["celer"].toFixed(3);
+       pend.innerHTML = ar[i]["pending"];
+       row.style = "padding-left: 50px;";
     }
 }
 

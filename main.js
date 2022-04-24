@@ -1,4 +1,4 @@
-console.log("code is being run as it were so to speak if you will easton sucks");
+//console.log("code is being run as it were so to speak if you will easton sucks");
 if( document.readyState !== 'loading' ) {
     
     initCode();
@@ -33,27 +33,51 @@ var totalCel = 0;
 var totalCorrect;
 var user;
 
+var givenAnswerArr;
+var celerArr;
+var scoreArr;
+
 function initCode()
 {
+
+
     const app = firebase.initializeApp(firebaseConfig);
+
+    
+    user = JSON.parse(localStorage.getItem("user"));
+
+    var newUserRef1 = firebase.database().ref("openedweek1/" + user["eml"]);
+    newUserRef1.update ({
+        "name": user["eml"],
+        });
+    
+
     totalScore = 0;
     totalCel = 0;
     totalCorrect = 0;
-    localStorage.getItem("user");
+    
     tossupNum = 0;
     lastAnswer; 
     files = new Array();
     answers = new Array();
+    givenAnswerArr = new Array();
+    celerArr = new Array();
+    scoreArr = new Array();
     
     correctsound = new Audio('correct.mp3');
     incorrectsound = new Audio('incorrect.mp3');
     buzzsound = new Audio('buzz.mp3');
     
-    answers[0] = 'American Gothic';
-    answers[1] = 'Tchaikovsky';
-    answers[2] = 'Oxidation';
-    answers[3] = 'Melville';
-    answers[4] = 'Bolivar';
+    document.getElementById("tossupNumP").innerText = "Tossup 1 of 20";
+
+    firebase.database().ref('week1answers').on('value', function(snap){
+        
+        snap.forEach(function(childNodes){
+            answers.push(childNodes.val());
+        });
+    });
+    console.log(answers);
+
     
     NextButton = document.getElementById("nextButton");
     EnterAnswer = document.getElementById("enterAnswer");
@@ -65,11 +89,11 @@ function initCode()
 
     //document.getElementById("finaldiv").style.visibility = "hidden";
 
-    user = JSON.parse(localStorage.getItem("user"));
+    
     // console.log(user["eml"]);
     // console.log(user);
 
-    for(let i = 0; i < 5; i++)
+    for(let i = 0; i < 20; i++)
     {
         files[i] = new Audio('Tossups\\' + (i+1).toString() + '.mp3');
     }
@@ -102,6 +126,7 @@ function buzz()
 function nextTossup()
 {
     tossupNum++;
+    document.getElementById("tossupNumP").innerText = "Tossup " + (tossupNum+1) + " of 20";
     NextButton.disabled = true;
     document.getElementById("answer").value = "";
     hide(EnterAnswer);
@@ -111,11 +136,42 @@ function nextTossup()
     StartTossupButton.disabled = false;
     BuzzButton.disabled = true;
     
+    var i = 0;
+
+    var elem = document.getElementById("prog");
+    var newValue = ((tossupNum+1)/20) * 100;
+    elem.setAttribute("style", "width: " + newValue.toString() + "%");
+    
 
 }
 function evaluateAnswer()
 {
-    if (document.getElementById("answer").value.toLowerCase() == (answers[tossupNum].toLowerCase()))
+    
+    var deltaTime = nowTime - startTime;
+    var celer = 1.0 - ((deltaTime/1000.0) / audio.duration);
+    var score = Math.round(10 + (10 * celer));
+    celerArr.push(celer);
+    scoreArr.push(score);
+
+    var correct;
+    var valids = JSON.parse(JSON.stringify(answers[tossupNum.toString()]));
+    for (var pp  = 0; pp < valids.length; pp++)
+    {
+        valids[pp] = valids[pp].toLowerCase();
+        valids[pp] = valids[pp].replace(/\s+/g, "");
+    }
+    if (valids.indexOf(document.getElementById("answer").value.toLowerCase().replace(/\s+/g, "")) != -1)
+    {
+        correct = true;
+    }
+    else
+    {
+        correct = false;
+    }
+
+    givenAnswerArr.push(document.getElementById("answer").value + "|" + correct.toString());
+
+    if (correct)
     {
         lastAnswer = true;
         correctsound.muted = false;
@@ -124,11 +180,6 @@ function evaluateAnswer()
         show(CorrectDisplay);
         show(CelerityDisplay);
         show(ScoreDisplay);
-
-        var deltaTime = nowTime - startTime;
-        var celer = 1.0 - ((deltaTime/1000.0) / audio.duration);
-        
-        var score = Math.round(10 + (10 * celer));
 
         totalScore += score;
         totalCorrect++;
@@ -144,19 +195,32 @@ function evaluateAnswer()
     }
     else
     {
+        
+
         incorrectsound.muted = false;
         incorrectsound.play();
         lastAnswer = false;
         CorrectDisplay.innerHTML = "Incorrect!";
         show(CorrectDisplay);
         show(CelerityDisplay);
-        CelerityDisplay.innerHTML = "Correct answer: " + answers[tossupNum];
+        var correctstring = "";
+        var validAnswersArray = answers[tossupNum];
+        for (var ct = 0; ct < validAnswersArray.length; ct++)
+        {
+            correctstring += validAnswersArray[ct];
+            if (ct != (validAnswersArray.length - 1))
+            {
+                correctstring += ", ";
+            }
+            
+        }
+        CelerityDisplay.innerHTML = "Correct answers: " + correctstring;
     }
     show(NextButton);
     NextButton.disabled = false;
 
 
-    if (tossupNum == 4)
+    if (tossupNum == 19)
     {
         endGame();
     }
@@ -212,7 +276,11 @@ function endGame()
         "lastname":user["last"],
         "celerity":c,
         "score":totalScore,
-        "numcorrect":totalCorrect
+        "numcorrect":totalCorrect,
+        "answerArr":givenAnswerArr,
+        "scoreArr":scoreArr,
+        "celerArr":celerArr,
+        "pending":"true"
         });
 
         //document.getElementById("maindiv").style.visibility = "hidden";
@@ -222,7 +290,7 @@ function endGame()
     BuzzButton.disabled = true;
     document.getElementById("enterButton").disabled = true;
         //hide(NextButton);
-        document.getElementById("finalDisplay").innerHTML = "Total Score: " + totalScore + "<br>" + "Avg. Correct Celerity: " + c.toFixed(3) + "<br>" +"# of Questions Correct: " + totalCorrect;
+        document.getElementById("finalDisplay").innerHTML = "Total Score: " + totalScore + "<br>" + "Avg. Correct Celerity: " + c.toFixed(3) + "<br>" +"# of Questions Correct: " + totalCorrect + "<br>" + "<br>" + "Please note: all responses will be reviewed before scores are finalized.";
 
 }
 function exitGame()
