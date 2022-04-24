@@ -46,6 +46,20 @@ function initCode()
     
     user = JSON.parse(localStorage.getItem("user"));
 
+    const pageAccessedByReload = (
+        (window.performance.navigation && window.performance.navigation.type === 1) ||
+          window.performance
+            .getEntriesByType('navigation')
+            .map((nav) => nav.type)
+            .includes('reload')
+      );
+      
+    if(pageAccessedByReload)
+    {
+        alert("You have already played this week's Beterword! Laf!\n If this is a mistake, please email maioranagrant@gmail.com");
+        window.location.replace('home.html');
+    }
+
     var newUserRef1 = firebase.database().ref("openedweek1/" + user["eml"]);
     newUserRef1.update ({
         "name": user["eml"],
