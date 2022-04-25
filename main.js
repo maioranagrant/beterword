@@ -45,6 +45,10 @@ function initCode()
 
     
     user = JSON.parse(localStorage.getItem("user"));
+    if (user === null)
+    {
+        window.location.replace(index.html);
+    }
 
     const pageAccessedByReload = (
         (window.performance.navigation && window.performance.navigation.type === 1) ||
@@ -206,7 +210,7 @@ function evaluateAnswer()
 
         
         celer = celer.toFixed(3)
-        ScoreDisplay.innerHTML = "Tossup Score: " + score + " points" + "<br>" + "Total score: " + totalScore;
+        ScoreDisplay.innerHTML = "Tossup Score: " + score  + "<br>" + "Total score: " + totalScore;
         CelerityDisplay.innerHTML = "Celerity: " + celer;
     }
     else
@@ -230,7 +234,7 @@ function evaluateAnswer()
             }
             
         }
-        CelerityDisplay.innerHTML = "Correct answers: " + correctstring;
+        CelerityDisplay.innerHTML = "Correct answers: " + correctstring + "<br>" + "<br>" + "Please note: all responses will be reviewed before scores are finalized.";
     }
     show(NextButton);
     NextButton.disabled = false;

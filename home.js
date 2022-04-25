@@ -5,6 +5,10 @@ function startGame(week)
     
     var found = false;
     user =  JSON.parse(localStorage.getItem("user"));
+    if (user === null)
+    {
+        window.location.replace("index.html");
+    }
     //console.log(user["eml"]);
     var result = user["eml"];
     //console.log()
