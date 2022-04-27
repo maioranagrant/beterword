@@ -2,9 +2,18 @@ const table = document.getElementById("board");
 const app = firebase.initializeApp(firebaseConfig);
 var arr = new Array();
 
-fillTable();
 
-function fillTable()
+if( document.readyState !== 'loading' ) {
+    
+    fillTable(1);
+} else {
+    document.addEventListener('DOMContentLoaded', function () {
+       
+        fillTable(1);
+    });
+}
+
+function fillTable(week)
 {
 
     firebase.database().ref("week1scores").orderByChild("score").on('value', function(snap){
@@ -74,6 +83,61 @@ function fillTableHtml(ar)
        pend.innerHTML = ar[i]["pending"];
        row.style = "padding-left: 50px;";
     }
+}
+
+function changeWeek(week)
+{
+  
+    if (week == 1)
+    {
+        document.getElementById("1button").disabled = true;
+        document.getElementById("2button").disabled = false;
+    }
+    else if (week == 2)
+    {
+        document.getElementById("1button").disabled = false;
+        document.getElementById("2button").disabled = true;
+    }
+
+    firebase.database().ref("week" + week + "scores").orderByChild("score").on('value', function(snap){
+
+        snap.forEach(function(childNodes){
+     
+            if (childNodes.val().firstName === "placeholder")
+            {
+                'pass';
+            }
+            else
+            {
+           //This loop iterates over children of user_id
+           //childNodes.key is key of the children of userid such as (20170710)
+           //console.log(childNodes.val().score);
+            const dict = 
+            {
+                first : childNodes.val().firstName,
+                last : childNodes.val().lastname,
+                score : childNodes.val().score,
+                number : childNodes.val().numcorrect,
+                celer : childNodes.val().celerity,
+                pending: childNodes.val().pending
+                
+            };
+            //console.log(childNodes.val().username);
+            //console.log(childNodes.val().numcorrect);
+            arr.push(dict);
+            //console.log(arr.length);
+            //childNodes.val().name;
+            //childNodes.val().time;
+            //childNodes.val().rest_time;
+            //childNodes.val().interval_time;
+     
+        }
+       });
+       //console.log(arr[0]["number"]);
+       arr.reverse();
+       fillTableHtml(arr);
+
+     });
 }
 
 function returnToHome()

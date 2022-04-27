@@ -17,6 +17,7 @@ function goBackToLogin()
 
 function addToDatabase()
 {
+    document.getElementById("login-form-submit").disabled = true;
     const app = firebase.initializeApp(firebaseConfig);
 
     eml = emailField.value;
@@ -53,10 +54,7 @@ function addToDatabase()
                   return;
               }
     });
-    });
-    
 
-    
     if (!found)
     {
         firebase.database().ref('users/' + result).on('value', function(snapshot) {
@@ -74,9 +72,15 @@ function addToDatabase()
             successDisplay.innerText = "Account created successfully! Please log in.";
             successDisplay.style.visibility = "visible";
             goBack.style.visibility = "visible";
+            
     
         
         });
     }
+    });
+    
+
+    
+    
     
 }

@@ -43,6 +43,12 @@ function startGame(week)
         
     
 }
+function logOut()
+{
+    user = null;
+    localStorage.removeItem("user");
+    window.location.replace('index.html');
+}
 function viewLeaderBoard()
 {
     window.location.replace('leaderboard.html');
