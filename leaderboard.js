@@ -4,13 +4,13 @@ var arr = new Array();
 
 
 if( document.readyState !== 'loading' ) {
-    
+    localStorage.setItem("week",1);
     fillTable(1);
+    
 } else {
     document.addEventListener('DOMContentLoaded', function () {
-       
-        fillTable(1);
         localStorage.setItem("week",1);
+        fillTable(1);
     });
 }
 
