@@ -39,8 +39,6 @@ var scoreArr;
 
 function initCode()
 {
-
-
     const app = firebase.initializeApp(firebaseConfig);
 
     
