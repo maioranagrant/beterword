@@ -4,13 +4,21 @@ var arr = new Array();
 
 
 if( document.readyState !== 'loading' ) {
-    localStorage.setItem("week",1);
-    fillTable(1);
+    var w = localStorage.getItem("week");
+        if (w === null)
+        {
+            w = 1;
+        }
+        fillTable(w);
     
 } else {
     document.addEventListener('DOMContentLoaded', function () {
-        localStorage.setItem("week",1);
-        fillTable(1);
+        var w = localStorage.getItem("week");
+        if (w === null)
+        {
+            w = 1;
+        }
+        fillTable(w);
     });
 }
 
