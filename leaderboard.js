@@ -5,17 +5,21 @@ var arr = new Array();
 
 if( document.readyState !== 'loading' ) {
     var w = localStorage.getItem("week");
+    console.log("eh1");
         if (w === null)
         {
+            console.log("eh");
             w = 1;
         }
         fillTable(w);
     
 } else {
     document.addEventListener('DOMContentLoaded', function () {
+        console.log("eh1");
         var w = localStorage.getItem("week");
         if (w === null)
         {
+            console.log("eh");
             w = 1;
         }
         fillTable(w);
