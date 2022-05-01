@@ -62,7 +62,7 @@ function initCode()
         window.location.replace('home.html');
     }
 
-    var newUserRef1 = firebase.database().ref("openedweek1/" + user["eml"]);
+    var newUserRef1 = firebase.database().ref("openedweek2/" + user["eml"]);
     newUserRef1.update ({
         "name": user["eml"],
         });
@@ -86,7 +86,7 @@ function initCode()
     
     document.getElementById("tossupNumP").innerText = "Tossup 1 of 20";
 
-    firebase.database().ref('week1answers').on('value', function(snap){
+    firebase.database().ref('week2answers').on('value', function(snap){
         
         snap.forEach(function(childNodes){
             answers.push(childNodes.val());
@@ -275,7 +275,7 @@ function show(domElement)
 
 function endGame()
 {
-    var newUserRef = firebase.database().ref("week1scores/" + user["eml"]);
+    var newUserRef = firebase.database().ref("week2scores/" + user["eml"]);
 
         var c;
         if (totalCorrect == 0)
