@@ -7,7 +7,7 @@ if( document.readyState !== 'loading' ) {
     var w = localStorage.getItem("week");
         if (w === null)
         {
-            w = 1;
+            w = 2;
         }
         fillTable(w);
     
@@ -16,7 +16,7 @@ if( document.readyState !== 'loading' ) {
         var w = localStorage.getItem("week");
         if (w === null)
         {
-            w = 1;
+            w = 2;
         }
         fillTable(w);
     });
@@ -24,6 +24,8 @@ if( document.readyState !== 'loading' ) {
 
 function fillTable(week)
 {
+
+    document.getElementById("header").innerText = "Beterword Week " + week + " Leaderboard";
     console.log(localStorage.getItem("week"));
 
     firebase.database().ref("week" + localStorage.getItem("week") + "scores").orderByChild("score").on('value', function(snap){
