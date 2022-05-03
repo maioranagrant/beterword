@@ -19,6 +19,11 @@ function initCode()
     
 }
 
+function return2Home()
+{
+    window.location.replace('home.html');
+}
+
 function playAudioTest()
 {
     audio.play();
