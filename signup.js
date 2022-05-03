@@ -21,6 +21,13 @@ function addToDatabase()
     const app = firebase.initializeApp(firebaseConfig);
 
     eml = emailField.value;
+
+    if ((eml === "") || (eml.indexOf("@") === -1))
+    {
+        document.getElementById("login-form-submit").enabled = true;
+        return;
+    }
+    
     pw = passwordField.value;
     first = firstName.value;
     last = lastName.value;
