@@ -92,7 +92,6 @@ function initCode()
             answers.push(childNodes.val());
         });
     });
-    console.log(answers);
 
     
     NextButton = document.getElementById("nextButton");
