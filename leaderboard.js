@@ -7,7 +7,7 @@ if( document.readyState !== 'loading' ) {
     var w = localStorage.getItem("week");
         if (w === null)
         {
-            w = 2;
+            w = 3;
         }
         fillTable(w);
     
@@ -16,7 +16,7 @@ if( document.readyState !== 'loading' ) {
         var w = localStorage.getItem("week");
         if (w === null)
         {
-            w = 2;
+            w = 3;
         }
         fillTable(w);
     });
