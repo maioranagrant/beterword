@@ -97,6 +97,11 @@ function fillTableHtml(ar)
     }
 }
 
+function launchComp()
+{
+    window.location.replace("compare.html");
+}
+
 function changeWeek(week)
 {
     localStorage.setItem("week",week);
