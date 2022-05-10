@@ -99,7 +99,32 @@ function fillTableHtml(ar)
 
 function launchComp()
 {
-    window.location.replace("compare.html");
+    firebase.database().ref('openedweek3').on('value', function(snap){
+        snap.forEach(function(childNodes){
+            if (childNodes.val().name === "placeholder")
+            {
+                'pass';
+            }
+            else
+            {
+            let first = (childNodes.val().name).replace(/\s+/g, "");
+            let second = result;
+            if (first.toString() === second.toString())
+            {
+                found = true;
+            }
+        }
+        });
+        if (found)
+        {
+            window.location.replace("compare.html");
+        }
+        else
+        {
+            return;
+        }
+    });
+    
 }
 
 function changeWeek(week)

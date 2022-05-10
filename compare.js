@@ -57,7 +57,7 @@ function main()
         });
         if (found)
         {
-            console.log("here");
+            
         }
         else
         {
@@ -77,6 +77,10 @@ function reset()
     first.value = "";
     second = document.getElementById("name2");
     second.value = "";
+}
+function returnToLeaderboard()
+{
+    window.location.replace('leaderboard.html');
 }
 
 function startComp()
