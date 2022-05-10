@@ -26,7 +26,6 @@ function fillTable(week)
 {
 
     document.getElementById("header").innerText = "Beterword Week " + week + " Leaderboard";
-    console.log(localStorage.getItem("week"));
 
     firebase.database().ref("week" + localStorage.getItem("week") + "scores").orderByChild("score").on('value', function(snap){
 
@@ -99,6 +98,8 @@ function fillTableHtml(ar)
 
 function launchComp()
 {
+    user =  JSON.parse(localStorage.getItem("user"));
+    var result = user["eml"];
     firebase.database().ref('openedweek3').on('value', function(snap){
         snap.forEach(function(childNodes){
             if (childNodes.val().name === "placeholder")
