@@ -42,12 +42,24 @@ tr:nth-child(even) {
 <div id = "tableDiv" style = "padding-bottom: 50px">
 <table id = "board" class = "center">
   <tr style = "padding-left: 50px;">
-    <th>Rank</th>
-    <th>Name</th>
-    <th>Score</th>
-    <th># Correct</th>
-     <th>Avg. Correct Celerity</th>
-     <th>Judgement Pending?</th>
+    <th>
+      <input type = "button" style="font-weight:bold;" id = "sort0" value = "Rank" data-order = "1" onclick = "sortTable(0)">
+    </th>
+    <th>
+      <input type = "button" style="font-weight:bold;" id = "sort1" value = "Name" data-order = "1" onclick = "sortTable(1)">
+    </th>
+    <th>
+      <input type = "button" style="font-weight:bold;" id = "sort2" value = "Score" data-order = "1" onclick = "sortTable(2);">
+    </th>
+    <th>
+      <input type = "button" style="font-weight:bold;" id = "sort3" value = "# Correct" data-order = "1" onclick = "sortTable(3);">
+    </th>
+     <th>
+      <input type = "button" style="font-weight:bold;" id = "sort4" value = "Avg. Correct Celerity" data-order = "1" onclick = "sortTable(4);">
+     </th>
+     <th>
+      Judgement Pending?
+     </th>
   </tr>
  
 </table>

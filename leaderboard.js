@@ -96,6 +96,89 @@ function fillTableHtml(ar)
     }
 }
 
+// function sortTable(str)
+// {
+//     var head = table.rows[0];
+//     for (var i = 1, row; row = table.rows[i]; i++)
+//     {
+//         console.log(row.cells[0].innerHTML);
+//     }
+// }
+function sortTable(num) {
+    var button = document.getElementById("sort" + num.toString());
+    button.setAttribute("data-order",1-button.getAttribute("data-order"));
+
+    //console.log(button.getAttribute("data-order"));
+    var table, rows, switching, i, x, y, shouldSwitch;
+    table = document.getElementById("board");
+    switching = true;
+    /* Make a loop that will continue until
+    no switching has been done: */
+    while (switching) {
+      // Start by saying: no switching is done:
+      switching = false;
+      rows = table.rows;
+      /* Loop through all table rows (except the
+      first, which contains table headers): */
+      for (i = 1; i < (rows.length - 1); i++) {
+        // Start by saying there should be no switching:
+        shouldSwitch = false;
+        /* Get the two elements you want to compare,
+        one from current row and one from the next: */
+        if (button.getAttribute("data-order") == 0)
+        {
+            x = rows[i].cells[num];
+            y = rows[i + 1].cells[num];
+        }
+        else
+        {
+            y = rows[i].cells[num];
+            x = rows[i + 1].cells[num];
+        }
+        // Check if the two rows should switch place:
+        if (num == 2 || num == 3)
+        {
+            if (parseInt(x.innerHTML) < parseInt(y.innerHTML)) {
+                // If so, mark as a switch and break the loop:
+                shouldSwitch = true;
+                break;
+              }
+        }
+        else if (num == 0)
+        {
+            if (parseInt(x.innerHTML) > parseInt(y.innerHTML)) {
+                // If so, mark as a switch and break the loop:
+                shouldSwitch = true;
+                break;
+              }
+        }
+        else if (num == 1)
+        {
+            if ((x.innerHTML).toLowerCase() > (y.innerHTML).toLowerCase()) {
+                // If so, mark as a switch and break the loop:
+                shouldSwitch = true;
+                break;
+              }
+        }
+        else
+        {
+            if (parseFloat(x.innerHTML) < parseFloat(y.innerHTML)) {
+                // If so, mark as a switch and break the loop:
+                shouldSwitch = true;
+                break;
+              }
+        }
+        
+      }
+      if (shouldSwitch) {
+        /* If a switch has been marked, make the switch
+        and mark that a switch has been done: */
+        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+        switching = true;
+      }
+    }
+  }
+
 function launchComp()
 {
     user =  JSON.parse(localStorage.getItem("user"));
