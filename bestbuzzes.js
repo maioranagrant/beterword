@@ -36,8 +36,34 @@ function main()
         window.location.replace("leaderboard.html");
     }
     //console.log(user["eml"]);
-    var result = user["eml"];
-    var found = false;
+    
+}
+function reset()
+{
+    document.getElementById("enterPlayers").disabled = false;
+    document.getElementById("clear").disabled = true;
+    first = document.getElementById("name1");
+    first.value = "";
+    document.getElementById("joe").innerHTML = "";
+}
+function returnToLeaderboard()
+{
+    window.location.replace('leaderboard.html');
+}
+
+function startComp()
+{
+    
+    document.getElementById("clear").disabled = false;
+    document.getElementById("enterPlayers").disabled = true;
+   
+    //var n1 = first.value;
+    var week = document.getElementById("name1").value;
+    week = week.replace(" ","");
+    if (week == 7)
+    {
+        var result = user["eml"];
+        var found = false;
     
     firebase.database().ref('openedweek7').on('value', function(snap){
         snap.forEach(function(childNodes){
@@ -61,31 +87,15 @@ function main()
         }
         else
         {
-            window.location.replace('leaderboard.html');
+            alert("In order to view this week's best buzzes, please complete the game.");
+            return;
         }
     });
-}
-function reset()
-{
-    document.getElementById("enterPlayers").disabled = false;
-    document.getElementById("clear").disabled = true;
-    first = document.getElementById("name1");
-    first.value = "";
-    document.getElementById("joe").innerHTML = "";
-}
-function returnToLeaderboard()
-{
-    window.location.replace('leaderboard.html');
-}
-
-function startComp()
-{
-    document.getElementById("clear").disabled = false;
-    document.getElementById("enterPlayers").disabled = false;
-   
-    //var n1 = first.value;
-    var week = document.getElementById("name1").value;
-    week = week.replace(" ","");
+    if (!found)
+    {
+        return;
+    }
+    }
     
     // for (var n1 = 0; n1 < 19; n1++)
     // {
