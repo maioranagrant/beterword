@@ -62,7 +62,7 @@ function initCode()
         window.location.replace('home.html');
     }
 
-    var newUserRef1 = firebase.database().ref("openedweek6/" + user["eml"]);
+    var newUserRef1 = firebase.database().ref("openedweek7/" + user["eml"]);
     newUserRef1.update ({
         "name": user["eml"],
         });
@@ -86,7 +86,7 @@ function initCode()
     
     document.getElementById("tossupNumP").innerText = "Tossup 1 of 20";
 
-    firebase.database().ref('week6answers').on('value', function(snap){
+    firebase.database().ref('week7answers').on('value', function(snap){
         
         snap.forEach(function(childNodes){
             answers.push(childNodes.val());
@@ -274,7 +274,7 @@ function show(domElement)
 
 function endGame()
 {
-    var newUserRef = firebase.database().ref("week6scores/" + user["eml"]);
+    var newUserRef = firebase.database().ref("week7scores/" + user["eml"]);
 
         var c;
         if (totalCorrect == 0)
@@ -307,7 +307,7 @@ function endGame()
     BuzzButton.disabled = true;
     document.getElementById("enterButton").disabled = true;
         //hide(NextButton);
-        document.getElementById("finalDisplay").innerHTML = "Total Score: " + totalScore + "<br>" + "Avg. Correct Celerity: " + c.toFixed(3) + "<br>" +"# of Questions Correct: " + totalCorrect + "<br>" + "<br>" + "Please note: all responses will be reviewed before scores are finalized.";
+        document.getElementById("finalDisplay").innerHTML = "Total Score: " + totalScore + "<br>" + "Avg. Correct Celerity: " + c.toFixed(3) + "<br>" +"# of Questions Correct: " + totalCorrect + "<br>" + "<br>" + "<strong>Be sure to check out the new Best Buzzes page!</strong><br>Please note: all responses will be reviewed before scores are finalized.";
 
 }
 function exitGame()

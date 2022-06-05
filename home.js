@@ -12,7 +12,7 @@ function startGame(week)
     //console.log(user["eml"]);
     var result = user["eml"];
     //console.log()
-    firebase.database().ref('openedweek6').on('value', function(snap){
+    firebase.database().ref('openedweek7').on('value', function(snap){
         
         snap.forEach(function(childNodes){
             if (childNodes.val().name === "placeholder")
