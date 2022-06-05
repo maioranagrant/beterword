@@ -183,6 +183,7 @@ function launchComp()
 {
     user =  JSON.parse(localStorage.getItem("user"));
     var result = user["eml"];
+    var found = false;
     firebase.database().ref('openedweek7').on('value', function(snap){
         snap.forEach(function(childNodes){
             if (childNodes.val().name === "placeholder")
