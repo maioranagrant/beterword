@@ -63,9 +63,10 @@ function startComp()
     if (week == 7)
     {
         var result = user["eml"];
-        var found = false;
+        
     
     firebase.database().ref('openedweek7').on('value', function(snap){
+        var found = false;
         snap.forEach(function(childNodes){
             if (childNodes.val().name === "placeholder")
             {
