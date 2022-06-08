@@ -63,10 +63,10 @@ function startComp()
     if (week == 7)
     {
         var result = user["eml"];
-        
+        let found = false;
     
     firebase.database().ref('openedweek7').on('value', function(snap){
-        var found = false;
+        found = false;
         snap.forEach(function(childNodes){
             if (childNodes.val().name === "placeholder")
             {
@@ -84,16 +84,18 @@ function startComp()
         });
         if (found)
         {
-            
+            localStorage.setItem("found","true");
         }
         else
         {
             alert("In order to view this week's best buzzes, please complete the game.");
-            return;
+            localStorage.setItem("found","false");
         }
     });
+    
     if (!found)
     {
+        localStorage.setItem("found","null");
         return;
     }
     }
@@ -107,7 +109,7 @@ function startComp()
                 ansArr1.push(childNodes.val());
             });
         });
-        console.log(ansArr1);
+        
         firebase.database().ref("week" + week + "scores").on('value', function(snap){
             topCelsArr = new Array();
             topUsersArr = new Array();
@@ -184,7 +186,7 @@ function startComp()
             }
 
         });
-        
+    
     }
     
 
