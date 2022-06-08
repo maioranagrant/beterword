@@ -1,6 +1,6 @@
 const app = firebase.initializeApp(firebaseConfig);
 
-function startGame(week)
+async function startGame(week)
 {
     
     var found = false;
@@ -12,7 +12,8 @@ function startGame(week)
     //console.log(user["eml"]);
     var result = user["eml"];
     //console.log()
-    firebase.database().ref('openedweek7').on('value', function(snap){
+    const dbbb = firebase.database().ref('openedweek7');
+    await dbbb.once('value', function(snap){
         
         snap.forEach(function(childNodes){
             if (childNodes.val().name === "placeholder")

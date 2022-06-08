@@ -51,7 +51,12 @@ function returnToLeaderboard()
     window.location.replace('leaderboard.html');
 }
 
-function startComp()
+function done()
+{
+
+}
+
+async function startComp()
 {
     
     document.getElementById("clear").disabled = false;
@@ -60,13 +65,14 @@ function startComp()
     //var n1 = first.value;
     var week = document.getElementById("name1").value;
     week = week.replace(" ","");
+    let found = null;
     if (week == 7)
     {
         var result = user["eml"];
-        let found = false;
+        const dbbb = firebase.database().ref('openedweek7');
     
-    firebase.database().ref('openedweek7').on('value', function(snap){
-        found = false;
+    await dbbb.once('value', function(snap){
+        
         snap.forEach(function(childNodes){
             if (childNodes.val().name === "placeholder")
             {
@@ -84,15 +90,18 @@ function startComp()
         });
         if (found)
         {
-            localStorage.setItem("found","true");
+           
         }
         else
         {
+            
+            found = false;
             alert("In order to view this week's best buzzes, please complete the game.");
-            localStorage.setItem("found","false");
+            //throw "exit";
+            
         }
     });
-    
+    console.log(found);
     if (!found)
     {
         localStorage.setItem("found","null");

@@ -22,12 +22,12 @@ if( document.readyState !== 'loading' ) {
     });
 }
 
-function fillTable(week)
+async function fillTable(week)
 {
 
     document.getElementById("header").innerText = "Beterword Week " + week + " Leaderboard";
-
-    firebase.database().ref("week" + localStorage.getItem("week") + "scores").orderByChild("score").on('value', function(snap){
+    const dbb = firebase.database().ref("week" + localStorage.getItem("week") + "scores").orderByChild("score");
+    await dbb.once('value', function(snap){
 
         snap.forEach(function(childNodes){
      
