@@ -188,8 +188,8 @@ async function startComp()
                 string += avgCelsArr[n2];
                 string += "<br>";
                 var amtCorrect = amtCorrectArr[n2];
-                
-                string += amtCorrect + "/" + totalplayers + " correct";
+                var percy = ((amtCorrect / parseFloat(totalplayers)) * 100 ).toFixed(1);
+                string += amtCorrect + "/" + totalplayers + " (" + percy + "%) correct ";
                 p.innerHTML = string;
                 document.getElementById("joe").appendChild(p);
             }
