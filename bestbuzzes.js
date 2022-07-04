@@ -66,10 +66,10 @@ async function startComp()
     var week = document.getElementById("name1").value;
     week = week.replace(" ","");
     let found = null;
-    if (week == 10)
+    if (week == 11)
     {
         var result = user["eml"];
-        const dbbb = firebase.database().ref('openedweek10');
+        const dbbb = firebase.database().ref('openedweek11');
     
     await dbbb.once('value', function(snap){
         
