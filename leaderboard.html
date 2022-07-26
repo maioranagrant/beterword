@@ -29,7 +29,7 @@ tr:nth-child(even) {
 <body>
 
 <h2 id = "header" style = "padding-left: 50px; padding-top: 50px"></h2>
-<div style = "padding-left: 50px; padding-top: 10px; padding-bottom: 30px">
+<div style = "padding-left: 50px; padding-top: 10px; padding-bottom: 10px">
   <input type = "button" value = "Back" onclick = "returnToHome();">
   <input type = "button" id = "1button" value = "Week 1" onclick = "changeWeek(1);">
   <input type = "button" id = "2button" value = "Week 2" onclick = "changeWeek(2);">
@@ -44,9 +44,14 @@ tr:nth-child(even) {
   <input type = "button" id = "11button" value = "Week 11" onclick = "changeWeek(11);">
   <input type = "button" id = "12button" value = "Week 12" onclick = "changeWeek(12);">
   <input type = "button" id = "13button" value = "Week 13" onclick = "changeWeek(13);">
+  <input type = "button" id = "14button" value = "Week 14" onclick = "changeWeek(14);">
+  
+</div >
+<div style = "padding-left: 50px; padding-top: 10px; padding-bottom: 30px">
   <input type = "button" id = "compbutton" value = "Compare Players Head-to-Head" onclick = "launchComp();">
   <input type = "button" id = "compbutton" value = "View Best Buzzes and Question Stats" onclick = "goToBest();">
-</div >
+  <input type = "button" id = "statsbutton" value = "View Lifetime Stats" onclick = "goToStats();">
+</div>
 <div id = "tableDiv" style = "padding-bottom: 50px">
 <table id = "board" class = "center">
   <tr style = "padding-left: 50px;">

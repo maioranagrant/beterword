@@ -7,7 +7,7 @@ if( document.readyState !== 'loading' ) {
     var w = localStorage.getItem("week");
         if (w === null)
         {
-            w = 13;
+            w = 14;
         }
         fillTable(w);
     
@@ -16,7 +16,7 @@ if( document.readyState !== 'loading' ) {
         var w = localStorage.getItem("week");
         if (w === null)
         {
-            w = 13;
+            w = 14;
         }
         fillTable(w);
     });
@@ -80,6 +80,13 @@ async function fillTable(week)
      //fillTableHtml();
     }
 
+
+function setPlayerData(joe)
+{
+    console.log(joe);
+    localStorage.setItem("playerToSearch",joe);
+    window.location.replace('stats.html');
+}
 function fillTableHtml(ar)
 {
     
@@ -94,7 +101,14 @@ function fillTableHtml(ar)
        var pend = row.insertCell(5);
 
        rank.innerHTML = i+1;
-       name.innerHTML = ar[i]["first"] + " " + ar[i]["last"];
+       poop = document.createElement("a");
+       poop.innerHTML = "<a style=\"color: #000000; text-decoration: none\";>" + ar[i]['first'] + ' ' + ar[i]['last'] + "</a>";
+       poop.href = "#";
+       //poop.setAttribute('onclick','setPlayerData(' + poop.textContent + ');');
+       
+       poop.onclick = function(){localStorage.setItem("playerToSearch",this.textContent);window.location.replace('stats.html');};
+       name.appendChild(poop);
+       
        score.innerHTML = ar[i]["score"];
        numCorrect.innerHTML = ar[i]["number"]; 
        celer.innerHTML = ar[i]["celer"].toFixed(3);
@@ -191,7 +205,7 @@ function launchComp()
     user =  JSON.parse(localStorage.getItem("user"));
     var result = user["eml"];
     var found = false;
-    firebase.database().ref('openedweek13').on('value', function(snap){
+    firebase.database().ref('openedweek14').on('value', function(snap){
         snap.forEach(function(childNodes){
             if (childNodes.val().name === "placeholder")
             {
@@ -284,4 +298,11 @@ function changeWeek(week)
 function returnToHome()
 {
     window.location.replace('home.html');
+}
+
+function goToStats()
+{
+    localStorage.removeItem("playerToSearch");
+    window.location.replace('stats.html');
+
 }

@@ -47,6 +47,8 @@ function initCode()
     {
         window.location.replace(index.html);
     }
+    
+    
 
     const pageAccessedByReload = (
         (window.performance.navigation && window.performance.navigation.type === 1) ||
@@ -62,7 +64,7 @@ function initCode()
         window.location.replace('home.html');
     }
 
-    var newUserRef1 = firebase.database().ref("openedweek13/" + user["eml"]);
+    var newUserRef1 = firebase.database().ref("openedweek14/" + user["eml"]);
     newUserRef1.update ({
         "name": user["eml"],
         });
@@ -86,7 +88,7 @@ function initCode()
     
     document.getElementById("tossupNumP").innerText = "Tossup 1 of 20";
 
-    firebase.database().ref('week13answers').on('value', function(snap){
+    firebase.database().ref('week14answers').on('value', function(snap){
         
         snap.forEach(function(childNodes){
             answers.push(childNodes.val());
@@ -115,6 +117,13 @@ function initCode()
     
     NextButton.disabled = true;
     BuzzButton.disabled = true;
+
+    document.addEventListener('keydown', function(event) {
+        if(event.keyCode == 32 && BuzzButton.disabled == false) {
+            buzz();
+            document.getElementById("answer").value = "";
+        }
+    });
 }
 
 
@@ -136,6 +145,8 @@ function buzz()
     buzzsound.play();
     show(EnterAnswer);
     BuzzButton.disabled = true;
+    document.getElementById("answer").focus();
+    document.getElementById("answer").value = "";
 
 }
 function nextTossup()
@@ -274,7 +285,7 @@ function show(domElement)
 
 function endGame()
 {
-    var newUserRef = firebase.database().ref("week13scores/" + user["eml"]);
+    var newUserRef = firebase.database().ref("week14scores/" + user["eml"]);
 
         var c;
         if (totalCorrect == 0)
@@ -312,6 +323,6 @@ function endGame()
 }
 function exitGame()
 {
-    localStorage.setItem("week","13");
+    localStorage.setItem("week","14");
     window.location.replace('leaderboard.html');
 }
