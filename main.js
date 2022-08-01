@@ -64,7 +64,7 @@ function initCode()
         window.location.replace('home.html');
     }
 
-    var newUserRef1 = firebase.database().ref("openedweek14/" + user["eml"]);
+    var newUserRef1 = firebase.database().ref("openedweek15/" + user["eml"]);
     newUserRef1.update ({
         "name": user["eml"],
         });
@@ -88,7 +88,7 @@ function initCode()
     
     document.getElementById("tossupNumP").innerText = "Tossup 1 of 20";
 
-    firebase.database().ref('week14answers').on('value', function(snap){
+    firebase.database().ref('week15answers').on('value', function(snap){
         
         snap.forEach(function(childNodes){
             answers.push(childNodes.val());
@@ -285,7 +285,7 @@ function show(domElement)
 
 function endGame()
 {
-    var newUserRef = firebase.database().ref("week14scores/" + user["eml"]);
+    var newUserRef = firebase.database().ref("week15scores/" + user["eml"]);
 
         var c;
         if (totalCorrect == 0)
@@ -323,6 +323,6 @@ function endGame()
 }
 function exitGame()
 {
-    localStorage.setItem("week","14");
+    localStorage.setItem("week","15");
     window.location.replace('leaderboard.html');
 }

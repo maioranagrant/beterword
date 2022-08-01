@@ -7,7 +7,7 @@ if( document.readyState !== 'loading' ) {
     var w = localStorage.getItem("week");
         if (w === null)
         {
-            w = 14;
+            w = 15;
         }
         fillTable(w);
     
@@ -16,7 +16,7 @@ if( document.readyState !== 'loading' ) {
         var w = localStorage.getItem("week");
         if (w === null)
         {
-            w = 14;
+            w = 15;
         }
         fillTable(w);
     });
@@ -205,7 +205,7 @@ function launchComp()
     user =  JSON.parse(localStorage.getItem("user"));
     var result = user["eml"];
     var found = false;
-    firebase.database().ref('openedweek14').on('value', function(snap){
+    firebase.database().ref('openedweek15').on('value', function(snap){
         snap.forEach(function(childNodes){
             if (childNodes.val().name === "placeholder")
             {
