@@ -12,7 +12,7 @@ async function startGame(week)
     //console.log(user["eml"]);
     var result = user["eml"];
     //console.log()
-    const dbbb = firebase.database().ref('openedweek15');
+    const dbbb = firebase.database().ref('openedweek16');
     await dbbb.once('value', function(snap){
         
         snap.forEach(function(childNodes){

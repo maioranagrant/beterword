@@ -39,7 +39,7 @@ function main()
     var result = user["eml"];
     var found = false;
     console.log(result);
-    firebase.database().ref('openedweek15').on('value', function(snap){
+    firebase.database().ref('openedweek16').on('value', function(snap){
         snap.forEach(function(childNodes){
             if (childNodes.val().name === "placeholder")
             {

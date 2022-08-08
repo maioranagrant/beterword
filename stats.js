@@ -86,7 +86,7 @@ async function search()
         ogName = "";
         playerCount = 0;
         playerPlacement = -1;
-        for (var e = 1; e <= 15; e++)
+        for (var e = 1; e <= 16; e++)
         {
             const dbb = firebase.database().ref("week" + e + "scores").orderByChild("score");
             await dbb.once("value", function(snap){
